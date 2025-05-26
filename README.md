@@ -1,143 +1,64 @@
-# 🎲 מערכת הגרלת מספרים
+# 🎲 Lottery Number System
 
-מערכת הגרלת מספרים מתקדמת עם ממשק משתמש בעברית ו-API מקצועי.
+A modern lottery number generator with .NET Core backend and Vue.js frontend.
 
-![Main Screen](docs/screenshots/main-screen.png)
+## 🌟 Features
+- Single number generation
+- Multiple number lottery (like Israeli Lotto)
+- Custom lottery with flexible settings
+- Hebrew interface (RTL support)
+- Lottery history tracking
+- Responsive design for mobile and desktop
 
-## ✨ תכונות
+## 🛠️ Tech Stack
+### Backend
+- .NET Core 8 Web API
+- C# with async/await
+- CORS enabled
+- RESTful API design
 
-- **הגרלת מספר יחיד** - הגרלה פשוטה של מספר אחד בטווח נתון
-- **הגרלת מספרים מרובים** - הגרלת מספר מספרים עם אפשרות למספרים ייחודיים
-- **הגרלה מותאמת אישית** - הגדרות מתקדמות לפי הצרכים
-- **היסטוריית הגרלות** - מעקב אחר ההגרלות הקודמות
-- **ממשק בעברית** - תמיכה מלאה בעברית מימין לשמאל
-- **עיצוב רספונסיבי** - מתאים למחשב ומובייל
+### Frontend  
+- Vue.js 3 (CDN)
+- Vanilla JavaScript
+- CSS Grid & Flexbox
+- Axios for HTTP requests
 
-## 🛠️ טכנולוגיות
+## 🚀 Quick Start
 
 ### Backend
-- **.NET Core 8** - Web API
-- **C#** - שפת התכנות
-- **Swagger** - תיעוד API
-- **CORS** - תמיכה בקריאות מדומיינים שונים
-- **Dependency Injection** - ארכיטקטורה מודולרית
-
-### Frontend
-- **Vue.js 3** - מסגרת JavaScript
-- **Vanilla JavaScript** - ללא תלויות נוספות
-- **CSS3** - עיצוב מתקדם עם Flexbox/Grid
-- **Axios** - קריאות HTTP
-- **Responsive Design** - תמיכה במכשירים שונים
-
-## 🚀 איך להתחיל
-
-### דרישות מקדימות
-- .NET 8 SDK
-- דפדפן מודרני (Chrome, Firefox, Safari, Edge)
-
-### הפעלת הפרויקט
-
-#### Backend
 ```bash
 cd backend/LotteryApi
 dotnet restore
 dotnet run
 ```
-השרת יעלה על: `http://localhost:5212`
 
-#### Frontend
+Server runs on: http://localhost:5234
 
-**אפשרות 1: פתיחה ישירה**
-```bash
-cd frontend
-# פתח את index.html בדפדפן
-```
-
-**אפשרות 2: עם Live Server (מומלץ)**
-```bash
-cd frontend
-# פתח VS Code והשתמש ב-Live Server extension
-```
-
-**אפשרות 3: עם שרת HTTP פשוט**
-```bash
-cd frontend
-python -m http.server 8080
-# או
-npx serve .
-```
+### Frontend
+Open `frontend/index.html` in browser or use Live Server
 
 ## 📡 API Endpoints
+* `GET /api/lottery/single` - Generate single number
+* `GET /api/lottery/multiple` - Generate multiple numbers
+* `POST /api/lottery/custom` - Custom lottery settings
+* `GET /api/lottery/health` - Health check
 
-### הגרלת מספר יחיד
-```http
-GET /api/lottery/single?min=1&max=100
-```
+## 🎯 Usage Examples
+* **Israeli Lotto:** 6 numbers between 1-49
+* **Dice Roll:** 1 number between 1-6
+* **Custom Range:** Any count, any range, with/without duplicates
 
-### הגרלת מספרים מרובים
-```http
-GET /api/lottery/multiple?count=6&min=1&max=37&unique=true
-```
+## 📱 Screenshots
+![Main screen:](backend/docs/screenshots/main-screen.png)
+![Results:](backend/docs/screenshots/results-screen.png)
+![History:](backend/docs/screenshots/history-view.png)
 
-### הגרלה מותאמת
-```http
-POST /api/lottery/custom
-Content-Type: application/json
+## 🔧 Development
+Built with clean architecture:
+* Controllers for HTTP handling
+* Services for business logic
+* Models for data structures
+* Configuration for CORS and settings
 
-{
-  "count": 7,
-  "min": 1,
-  "max": 37,
-  "unique": true
-}
-```
-
-### בדיקת בריאות
-```http
-GET /api/lottery/health
-```
-
-## 🏗️ ארכיטקטורה
-
-### Backend Structure
-```
-backend/LotteryApi/
-├── Controllers/         # API Controllers
-├── Services/           # Business Logic
-├── Models/            # Data Models
-├── Configuration/     # App Configuration
-└── Properties/        # Launch Settings
-```
-
-### Frontend Structure
-```
-frontend/
-├── src/
-│   ├── components/    # Vue Components
-│   ├── services/     # API Services
-│   ├── utils/        # Helper Functions
-│   └── styles/       # CSS Styles
-└── index.html        # Main HTML File
-```
-
-## 🎯 דוגמאות שימוש
-
-### הגרלת לוטו (6/37)
-- כמות: 6
-- טווח: 1-37
-- ייחודיים: כן
-
-### הגרלת קוביה
-- כמות: 1
-- טווח: 1-6
-
-### הגרלת בינגו
-- כמות: 25
-- טווח: 1-75
-- ייחודיים: כן
-
-## 🔧 פיתוח
-
-### הוספת תכונות חדשות
-1. הוסף endpoint חדש ב-`LotteryController`
-2. עדכן את `ILotteryService` ו-`Lott
+## 👩‍💻 Author
+Built by Levana Cohen as a full-stack development showcase.

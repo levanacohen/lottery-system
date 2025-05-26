@@ -13,8 +13,6 @@ A modern lottery number generator with .NET Core backend and Vue.js frontend.
 ## 🛠️ Tech Stack
 ### Backend
 - .NET Core 8 Web API
-- C# with async/await
-- CORS enabled
 - RESTful API design
 
 ### Frontend  

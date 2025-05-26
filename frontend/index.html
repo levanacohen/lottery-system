@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 מגריל המספרים</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <header>
+                <h1>🎲 מגריל המספרים</h1>
+                <p>בחר את סוג ההגרלה שלך</p>
+            </header>
+
+            <div class="lottery-options">
+                <!-- Single number -->
+                <div class="option-card">
+                    <h3>🎯 מספר יחיד</h3>
+                    <p class="card-description">הגרלה פשוטה של מספר אחד</p>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>מינימום:</label>
+                            <input v-model.number="singleMin" type="number" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>מקסימום:</label>
+                            <input v-model.number="singleMax" type="number" min="2">
+                        </div>
+                        <button @click="generateSingle" :disabled="loading" class="btn-primary">
+                            {{ loading ? '...מגריל' : 'הגרל מספר' }}
+                        </button>
+                    </div>
+                    <div v-if="singleResult" class="result">
+                        <div class="number-display single">{{ singleResult.numbers[0] }}</div>
+                        <p class="generated-time">{{ formatTime(singleResult.generatedAt) }}</p>
+                    </div>
+                </div>
+
+                <!-- Multiple numbers - fixed -->
+                <div class="option-card">
+                    <h3>🎰 לוטו מהיר</h3>
+                    <p class="card-description">6 מספרים בין 1-37 (כמו לוטו)</p>
+                    <div class="controls">
+                        <div class="preset-info">
+                            <span class="preset-label">כמות: 6</span>
+                            <span class="preset-label">טווח: 1-37</span>
+                            <span class="preset-label">ייחודיים: כן</span>
+                        </div>
+                        <button @click="generateQuickLotto" :disabled="loading" class="btn-primary">
+                            {{ loading ? '...מגריל' : 'הגרל לוטו מהיר' }}
+                        </button>
+                    </div>
+                    <div v-if="quickLottoResult" class="result">
+                        <div class="numbers-grid">
+                            <div v-for="number in quickLottoResult.numbers" :key="number" class="number-display">
+                                {{ number }}
+                            </div>
+                        </div>
+                        <p class="generated-time">{{ formatTime(quickLottoResult.generatedAt) }}</p>
+                    </div>
+                </div>
+
+                <!-- Custom numbers – All Settings -->
+                <div class="option-card">
+                    <h3>⚙️ הגרלה מותאמת</h3>
+                    <p class="card-description">התאם את כל ההגדרות לפי הרצונך</p>
+                    <div class="controls">
+                        <div class="input-group">
+                            <label>כמות מספרים:</label>
+                            <input v-model.number="customCount" type="number" min="1" max="50">
+                        </div>
+                        <div class="input-group">
+                            <label>מינימום:</label>
+                            <input v-model.number="customMin" type="number" min="1">
+                        </div>
+                        <div class="input-group">
+                            <label>מקסימום:</label>
+                            <input v-model.number="customMax" type="number" min="2">
+                        </div>
+                        <div class="checkbox-group">
+                            <label>
+                                <input v-model="customUnique" type="checkbox">
+                                מספרים ייחודיים (ללא חזרות)
+                            </label>
+                        </div>
+                        <button @click="generateCustom" :disabled="loading" class="btn-secondary">
+                            {{ loading ? '...מגריל' : 'הגרלה מותאמת' }}
+                        </button>
+                    </div>
+                    <div v-if="customResult" class="result">
+                        <div class="numbers-grid">
+                            <div v-for="number in customResult.numbers" :key="number" class="number-display">
+                                {{ number }}
+                            </div>
+                        </div>
+                        <p class="generated-time">{{ formatTime(customResult.generatedAt) }}</p>
+                        <p class="result-details">
+                            {{ customResult.count }} מספרים בטווח {{ customResult.range }}
+                            {{ customResult.isUnique ? '(ייחודיים)' : '(עם חזרות)' }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="error" class="error-message">
+                {{ error }}
+            </div>
+
+            <!-- History -->
+            <div v-if="history.length > 0" class="history">
+                <h3>📋 היסטוריית הגרלות</h3>
+                <div class="history-list">
+                    <div v-for="(item, index) in history.slice().reverse()" :key="index" class="history-item">
+                        <div class="history-numbers">
+                            <span v-for="number in item.numbers" :key="number" class="history-number">
+                                {{ number }}
+                            </span>
+                        </div>
+                        <div class="history-info">
+                            <span>{{ item.type || 'הגרלה' }}</span>
+                            <span>{{ item.range }}</span>
+                            <span>{{ formatTime(item.generatedAt) }}</span>
+                        </div>
+                    </div>
+                </div>
+                <button @click="clearHistory" class="btn-clear">🗑️ נקה היסטוריה</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

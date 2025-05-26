@@ -44,7 +44,7 @@ Open `frontend/index.html` in browser or use Live Server
 * `GET /api/lottery/health` - Health check
 
 ## 🎯 Usage Examples
-* **Israeli Lotto:** 6 numbers between 1-49
+* **Israeli Lotto:** 6 numbers between 1-37
 * **Dice Roll:** 1 number between 1-6
 * **Custom Range:** Any count, any range, with/without duplicates
 

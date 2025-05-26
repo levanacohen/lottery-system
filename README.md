@@ -49,9 +49,9 @@ Open `frontend/index.html` in browser or use Live Server
 * **Custom Range:** Any count, any range, with/without duplicates
 
 ## 📱 Screenshots
-![Main screen:](backend/docs/screenshots/main-screen.png)
-![Results:](backend/docs/screenshots/results-screen.png)
-![History:](backend/docs/screenshots/history-view.png)
+![Main screen:](docs/screenshots/main-screen.png)
+![Results:](docs/screenshots/results-screen.png)
+![History:](docs/screenshots/history-view.png)
 
 ## 🔧 Development
 Built with clean architecture:

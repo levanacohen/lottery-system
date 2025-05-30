@@ -1,6 +1,6 @@
 # Lottery Number System
 
-A modern lottery number generator with .NET Core backend and Vue.js frontend.
+A lottery number generator with .NET Core backend and Vue.js frontend.
 
 ## Features
 - Single number generation
